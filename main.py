@@ -2,9 +2,9 @@ import os
 import sys
 from dotenv import load_dotenv
 from google.genai import types
-from functions.get_files_info import schema_get_files_info, schema_get_file_content
-from functions.run_python_file import schema_run_python_file
-from functions.write_file import schema_write_file
+from functions.get_files_info import get_files_info, get_file_content, schema_get_files_info, schema_get_file_content
+from functions.run_python_file import run_python_file, schema_run_python_file
+from functions.write_file import write_file, schema_write_file
 
 if len(sys.argv)<2:
     print("Please provide the prompt: python main.py \"This is my question to the AI!\"")
@@ -40,6 +40,42 @@ available_functions = types.Tool(
     ]
 )
 
+func_map ={
+    "get_files_info": get_files_info,
+    "get_file_content": get_file_content,
+    "write_file": write_file,
+    "run_python_file": run_python_file,
+}
+
+def call_function(function_call_part, verbose=False):
+    if verbose:
+        print(f"Calling function: {function_call_part.name}({function_call_part.args})")
+    print(f" - Calling function: {function_call_part.name}")
+    args = function_call_part.args
+    args["working_directory"] = "./calculator"
+    if function_call_part.name not in func_map.keys():
+        return types.Content(
+            role="tool",
+            parts=[
+                types.Part.from_function_response(
+                    name=function_call_part.name,
+                    response={"error": f"Unknown function: {function_name}"},
+                )
+            ],
+        )
+    function_result = func_map[function_call_part.name](**args)
+
+    return types.Content(
+    role="tool",
+    parts=[
+        types.Part.from_function_response(
+            name=function_call_part.name,
+            response={"result": function_result},
+            )
+        ],
+    )
+
+
 
 load_dotenv()
 api_key = os.environ.get("GEMINI_API_KEY")
@@ -62,6 +98,8 @@ if verbose:
 if response.function_calls is not None:
     for function_call_part in response.function_calls:
         print(f"Calling function: {function_call_part.name}({function_call_part.args})")
+        result = call_function(function_call_part)
+        print(f"Result: {result.parts[0].function_response.response["result"]}")
 else:
     print("No function was called")
 print(response.text)
