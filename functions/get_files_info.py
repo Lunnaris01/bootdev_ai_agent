@@ -3,7 +3,7 @@ from google.genai import types
 
 
 MAX_CHARS = 10000
-SCHEMA_GET_FILES_INFO = types.FunctionDeclaration(
+schema_get_files_info = types.FunctionDeclaration(
 	name="get_files_info",
 	description="Lists files in the specified directory along with their sizes, constrained to the working directory.",
 	parameters=types.Schema(
@@ -12,6 +12,21 @@ SCHEMA_GET_FILES_INFO = types.FunctionDeclaration(
 			"directory": types.Schema(
 				type=types.Type.STRING,
 				description="The directory to list files from, relative to the working directory. If not provided, lists files in the working directory itself.",
+			),
+		},
+	),
+)
+
+
+schema_get_file_content = types.FunctionDeclaration(
+	name="get_file_content",
+	description="Read the content of a given file if it is within the allowed working directory",
+	parameters=types.Schema(
+		type=types.Type.OBJECT,
+		properties={
+			"file_path": types.Schema(
+				type=types.Type.STRING,
+				description="path and filename, relative to the working directory. This parameter is required.",
 			),
 		},
 	),
