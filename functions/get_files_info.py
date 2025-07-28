@@ -44,8 +44,7 @@ def get_files_info(working_directory, directory=None):
 		return f"Error: Cannot list \"{directory}\" as it is outside the permitted working directory"
 	contents = [f"- {filename}: file_size={os.path.getsize(os.path.join(abs_path,filename))}, is_dir={not os.path.isfile(os.path.join(abs_path,filename))}" for filename in os.listdir(abs_path)]
 	ret_str = f"Results for '{directory}' directory:\n" + "\n".join(contents)
-	print(ret_str)
-get_files_info("calculator","pkg")	
+	return ret_str
 
 
 def get_file_content(working_directory, file_path):

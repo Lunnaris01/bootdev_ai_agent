@@ -59,7 +59,7 @@ def call_function(function_call_part, verbose=False):
             parts=[
                 types.Part.from_function_response(
                     name=function_call_part.name,
-                    response={"error": f"Unknown function: {function_name}"},
+                    response={"error": f"Unknown function: {function_call_part.name}"},
                 )
             ],
         )
@@ -91,25 +91,36 @@ response = client.models.generate_content(
     config=types.GenerateContentConfig(tools=[available_functions], system_instruction=system_prompt)
     )
 
-if verbose:
-    print(f"User prompt: {user_prompt}")
-    print(f"Prompt tokens: {response.usage_metadata.prompt_token_count}")
-    print(f"Response tokens: {response.usage_metadata.candidates_token_count}")
-    print(response.candidates[0].content)
-if response.function_calls is not None:
-    for function_call_part in response.function_calls:
-        print(f"Calling function: {function_call_part.name}({function_call_part.args})")
-        result = call_function(function_call_part)
-        print(f"Result: {result.parts[0].function_response.response['result']}")
-        messages.append(types.Content(role="model", parts=[types.Part(text=response.candidates[0].content)])) # Append the content from the model's response.
-        messages.append(types.Content(role="user", parts=[types.Part(text=result.parts[0].function_response.response["result"])])) # Append the function response
+print(messages)
+while response.text == None:
+    for candidate in response.candidates:
+        c_message = types.Content(role="model", parts=[candidate.content])
+        messages.append(c_message) # Append the function response
+        print(c_message)
+    if response.function_calls is not None:
+        for function_call_part in response.function_calls:
+            if verbose:
+                print(f"Calling function: {function_call_part.name}({function_call_part.args})")
+            result = call_function(function_call_part)
+            if verbose:
+                print(f"Result: {result.parts[0].function_response.response['result']}")
+            messages.append(types.Content(role="tool", parts=[result.parts[0].function_response])) # Append the content from the model's response.
+        print([message for message in messages])
         response = client.models.generate_content(
             model="gemini-2.0-flash-001",
             contents=messages,
             config=types.GenerateContentConfig(tools=[available_functions], system_instruction=system_prompt)
             )
 
-else:
-    print("No function was called")
+    else:
+        print("No function was called, ending loop")
+        break
+
+
 print(response.text)
 
+if verbose:
+    print(f"User prompt: {user_prompt}")
+    print(f"Prompt tokens: {response.usage_metadata.prompt_token_count}")
+    print(f"Response tokens: {response.usage_metadata.candidates_token_count}")
+    print(response.candidates[0].content)
