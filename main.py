@@ -84,37 +84,32 @@ from google import genai
 
 client = genai.Client(api_key=api_key)
 
-
 response = client.models.generate_content(
-    model="gemini-2.0-flash-001",
+    model="gemini-2.5-flash",
     contents=messages,
     config=types.GenerateContentConfig(tools=[available_functions], system_instruction=system_prompt)
     )
 
 print(messages)
-while response.text == None:
+while response.function_calls is not None:
     for candidate in response.candidates:
-        c_message = types.Content(role="model", parts=[candidate.content])
-        messages.append(c_message) # Append the function response
-        print(c_message)
+        messages.append(candidate.content) # Append the function response
     if response.function_calls is not None:
+        tool_parts = []
         for function_call_part in response.function_calls:
             if verbose:
                 print(f"Calling function: {function_call_part.name}({function_call_part.args})")
             result = call_function(function_call_part)
             if verbose:
                 print(f"Result: {result.parts[0].function_response.response['result']}")
-            messages.append(types.Content(role="tool", parts=[result.parts[0].function_response])) # Append the content from the model's response.
-        print([message for message in messages])
-        response = client.models.generate_content(
-            model="gemini-2.0-flash-001",
-            contents=messages,
-            config=types.GenerateContentConfig(tools=[available_functions], system_instruction=system_prompt)
-            )
-
-    else:
-        print("No function was called, ending loop")
-        break
+            tool_parts.append(result.parts[0]) # Sammle nur den Part!
+        tool_content = types.Content(role="tool", parts=tool_parts)
+        messages.append(tool_content) # Append the content from the model's response.
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=messages,
+        config=types.GenerateContentConfig(tools=[available_functions], system_instruction=system_prompt)
+        )
 
 
 print(response.text)
@@ -123,4 +118,4 @@ if verbose:
     print(f"User prompt: {user_prompt}")
     print(f"Prompt tokens: {response.usage_metadata.prompt_token_count}")
     print(f"Response tokens: {response.usage_metadata.candidates_token_count}")
-    print(response.candidates[0].content)
+    print(messages)

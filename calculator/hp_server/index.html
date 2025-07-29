@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Potter Fan Site</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Welcome to Hogwarts</h1>
+            <p>Your portal to the magical world of Harry Potter</p>
+        </div>
+    </header>
+    <nav>
+        <ul class="container">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="gryffindor.html">Gryffindor</a></li>
+            <li><a href="hufflepuff.html">Hufflepuff</a></li>
+            <li><a href="ravenclaw.html">Ravenclaw</a></li>
+            <li><a href="slytherin.html">Slytherin</a></li>
+            <li><a href="characters/harry.html">Characters</a></li>
+            <li><a href="locations/hogwarts.html">Locations</a></li>
+            <li><button id="theme-toggle">Toggle Dark/Light Mode</button></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="hero-home">
+            <div class="container">
+                <h2>The Magic Awaits</h2>
+                <p>Step into a world of spells, potions, and extraordinary adventures.</p>
+                <a href="#about" class="btn">Learn More</a>
+            </div>
+        </section>
+
+        <section id="about" class="info-section">
+            <div class="container">
+                <h2>About Hogwarts</h2>
+                <p>Hogwarts School of Witchcraft and Wizardry is a British wizarding school located in the Scottish Highlands. It is the primary setting for the first six books in J. K. Rowling's Harry Potter series.</p>
+                <p>The school is divided into four houses, each bearing the last name of its founder: Godric Gryffindor, Helga Hufflepuff, Rowena Ravenclaw, and Salazar Slytherin.</p>
+            </div>
+        </section>
+
+        <section class="houses-preview">
+            <div class="container">
+                <h2>Explore the Houses</h2>
+                <div class="house-cards">
+                    <a href="gryffindor.html" class="btn-gryffindor">
+                        <h3>Gryffindor</h3>
+                    </a>
+                    <a href="hufflepuff.html" class="btn-hufflepuff">
+                        <h3>Hufflepuff</h3>
+                    </a>
+                    <a href="ravenclaw.html" class="btn-ravenclaw">
+                        <h3>Ravenclaw</h3>
+                    </a>
+                    <a href="slytherin.html" class="btn-slytherin">
+                        <h3>Slytherin</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="characters-preview">
+            <div class="container">
+                <h2>Meet the Characters</h2>
+                <p>Discover more about the brave, brilliant, and sometimes bewildering inhabitants of the wizarding world.</p>
+                <div class="character-cards">
+                    <a href="characters/harry.html" class="character-card">
+                        <img src="https://via.placeholder.com/150/7F0909/EEBA30?text=Harry" alt="Harry Potter">
+                        <h3>Harry Potter</h3>
+                        <p>The Boy Who Lived</p>
+                    </a>
+                    <a href="characters/hermione.html" class="character-card">
+                        <img src="https://via.placeholder.com/150/0E1A40/946B2D?text=Hermione" alt="Hermione Granger">
+                        <h3>Hermione Granger</h3>
+                        <p>The Brightest Witch of Her Age</p>
+                    </a>
+                    <a href="characters/ron.html" class="character-card">
+                        <img src="https://via.placeholder.com/150/7F0909/EEBA30?text=Ron" alt="Ron Weasley">
+                        <h3>Ron Weasley</h3>
+                        <p>The Loyal Friend</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Harry Potter Fan Site. All rights reserved.</p>
+            <p>Disclaimer: This is a fan-made site and is not affiliated with J.K. Rowling or Warner Bros. Entertainment.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
