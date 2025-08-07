@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hogwarts Fan Page - Discover Your House</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: url('assets/indexbg2.png') no-repeat center center fixed;
+            background-size: cover; /* Changed from 100vw 100vh to cover */
+            color: #eee;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6); /* Dark overlay for better text readability */
+            z-index: 1;
+        }
+        .container {
+            max-width: 900px;
+            padding: 40px;
+            background-color: rgba(20, 20, 20, 0.85);
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(173, 216, 230, 0.3); /* Lighter blue shadow for magic */
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 1.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            font-family: 'Cinzel', serif;
+            color: #ffd700; /* Gold */
+            margin-bottom: 20px;
+            font-size: 3em;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+        }
+        p {
+            font-family: 'Open Sans', sans-serif;
+            color: #e0e0e0;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .house-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .house-button {
+            padding: 25px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+        }
+        .house-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.7s ease-in-out;
+            transform: translate(-50%, -50%) rotate(45deg);
+            z-index: 0;
+            opacity: 0;
+        }
+        .house-button:hover::before {
+            width: 0;
+            height: 0;
+            opacity: 1;
+        }
+        .house-button:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        .gryffindor { background-color: #740001; border: 3px solid #e5d300;}
+        .slytherin { background-color: #1a472a; border: 3px solid #aaaaaa;}
+        .hufflepuff { background-color: #ffdb00; border: 3px solid #333333; color: #333;}
+        .ravenclaw { background-color: #222f5b; border: 3pxpx solid #946b2d;} /* Dark blue and bronze */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Hogwarts</h1>
+        <p>Step into the magical world of witchcraft and wizardry! Here, you can explore the noble houses of Hogwarts School of Witchcraft and Wizardry. Each house has a rich history, unique characteristics, and has nurtured some of the most famous witches and wizards of all time. Discover where you truly belong!</p>
+        <div class="house-grid">
+            <a href="gryffindor.html" class="house-button gryffindor">Gryffindor</a>
+            <a href="slytherin.html" class="house-button slytherin">Slytherin</a>
+            <a href="hufflepuff.html" class="house-button hufflepuff">Hufflepuff</a>
+            <a href="ravenclaw.html" class="house-button ravenclaw">Ravenclaw</a>
+        </div>
+        <p style="margin-top: 30px; font-size: 0.9em; color: #bbb;">"It is our choices, Harry, that show what we truly are, far more than our abilities." - Albus Dumbledore</p>
+    </div>
+</body>
+</html>

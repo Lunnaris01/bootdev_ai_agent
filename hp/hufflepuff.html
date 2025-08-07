@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hufflepuff House - Modernized</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Lora:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Lora', serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/hufflepuffbg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #FFD700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1000px;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 2px solid rgba(255, 215, 0, 0.6);
+            position: relative;
+            z-index: 1;
+            margin: 20px;
+        }
+
+        h1 {
+            font-family: 'Cinzel Decorative', serif;
+            color: #FFD700;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.5);
+            font-size: 3em;
+        }
+
+        .section-title {
+            font-family: 'Cinzel Decorative', serif;
+            color: #FFD700;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+        }
+
+        .characters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 20px;
+            padding-left: 150px;
+            padding-right: 150px;
+        }
+        .traits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            padding-top: 20px;
+            padding-left: 285px;
+            padding-right: 285px;
+        }
+        .info-button {
+            padding: 20px;
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #FFD700;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 100px;
+            box-sizing: border-box;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 1px 3px rgba(255, 215, 0, 0.5);
+        }
+
+        .info-button:hover {
+            background-color: rgba(255, 215, 0, 0.9);
+            color: #000000;
+            border-color: #000000;
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .hover-section {
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .content-hidden {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .hover-section:hover .content-hidden {
+            display: grid;
+            opacity: 1;
+        }
+
+        .main-info-button {
+            width: 350px;
+            margin-bottom: 30px;
+            font-size: 1.5em;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-color: #FFD700;
+        }
+
+        .hover-section:hover .main-info-button {
+            display: none;
+        }
+
+        #description-text {
+            color: #FFD700;
+            font-size: 1.3em;
+            font-style: italic;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            text-align: center;
+            transition: opacity 0.4s ease-in-out;
+            opacity: 0;
+            background-color: rgba(255, 215, 0, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+        }
+        #description-text.visible {
+            opacity: 1;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            background-color: rgba(0, 0, 0, 0.9);
+            color: #FFD700;
+            border: 2px solid #FFD700;
+            border-radius: 8px;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 0.9em;
+            text-decoration: none;
+            z-index: 10;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 1px 2px rgba(255, 215, 0, 0.6);
+        }
+
+        .back-button:hover {
+            background-color: rgba(255, 215, 0, 0.9);
+            color: #000000;
+            border-color: #000000;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                margin: 15px;
+            }
+
+            h1 {
+                font-size: 2.2em;
+            }
+
+            .section-title {
+                font-size: 1.8em;
+            }
+
+            .info-button {
+                font-size: 1em;
+                min-height: 60px;
+                padding: 15px;
+            }
+
+            .main-info-button {
+                width: 90%;
+                font-size: 1.2em;
+            }
+
+            #description-text {
+                font-size: 1em;
+                min-height: 70px;
+            }
+
+            .back-button {
+                top: 15px;
+                left: 15px;
+                padding: 8px 12px;
+                font-size: 0.8em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+
+            .characters-grid, .traits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-button {
+                min-height: 50px;
+                padding: 12px;
+            }
+
+            .main-info-button {
+                width: 100%;
+                font-size: 1.1em;
+            }
+
+            .back-button {
+                top: 10px;
+                left: 10px;
+                padding: 6px 10px;
+                font-size: 0.7em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">Back to Hogwarts</a>
+    <div class="container">
+        <h1>Welcome to Hufflepuff House!</h1>
+        <div id="description-text"></div>
+
+        <div class="hover-section">
+            <div class="info-button main-info-button">Characters</div>
+            <div class="content-hidden characters-grid">
+                <div class="info-button" data-description="Cedric Diggory was a popular and talented student who represented Hogwarts in the Triwizard Tournament, known for his fairness and strong moral compass.">Cedric Diggory</div>
+                <div class="info-button" data-description="Nymphadora Tonks was a cheerful and brave Auror, a Metamorphmagus, and a member of the Order of the Phoenix, known for her loyalty.">Nymphadora Tonks</div>
+                <div class="info-button" data-description="Pomona Sprout is the Herbology professor and Head of Hufflepuff House, known for her kind nature and expertise with magical plants.">Pomona Sprout</div>
+                <div class="info-button" data-description="Newt Scamander is a renowned magizoologist and author of 'Fantastic Beasts and Where to Find Them', known for his dedication to magical creatures.">Newt Scamander</div>
+                <div class="info-button" data-description="Hannah Abbott is a Hufflepuff student in Harry's year, who later becomes the landlady of the Leaky Cauldron.">Hannah Abbott</div>
+                <div class="info-button" data-description="Susan Bones is a Hufflepuff student in Harry's year and a member of Dumbledore's Army.">Susan Bones</div>
+                <div class="info-button" data-description="Ernie Macmillan is a Hufflepuff student in Harry's year, initially skeptical of Harry but later a supportive member of Dumbledore's Army.">Ernie Macmillan</div>
+                <div class="info-button" data-description="Justin Finch-Fletchley is a Muggle-born Hufflepuff student in Harry's year, who becomes a victim of the Chamber of Secrets.">Justin Finch-Fletchley</div>
+                <div class="info-button" data-description="Helga Hufflepuff was one of the four founders of Hogwarts School of Witchcraft and Wizardry, known for her dedication to fair play and hard work.">Helga Hufflepuff</div>
+            </div>
+        </div>
+
+        <div class="hover-section">
+            <div class="info-button main-info-button">Traits</div>
+            <div class="content-hidden traits-grid">
+                <div class="info-button" data-description="Hufflepuffs are known for their strong sense of loyalty, always standing by their friends.">Loyalty</div>
+                <div class="info-button" data-description="They are hardworking and dedicated, putting in effort to achieve their goals.">Hard Work</div>
+                <div class="info-button" data-description="Hufflepuffs value fair play and justice, treating everyone with equality and respect.">Fair Play</div>
+                <div class="info-button" data-description="Kindness and compassion are central to Hufflepuff's nature, making them excellent friends.">Kindness</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const descriptionText = document.getElementById('description-text');
+            const characterButtons = document.querySelectorAll('.characters-grid .info-button');
+            const traitButtons = document.querySelectorAll('.traits-grid .info-button');
+
+            const allSubGridButtons = [...characterButtons, ...traitButtons];
+
+            allSubGridButtons.forEach(button => {
+                button.addEventListener('mouseover', (event) => {
+                    const description = event.target.dataset.description;
+                    if (description) {
+                        descriptionText.textContent = description;
+                        descriptionText.classList.add('visible');
+                    }
+                });
+
+                button.addEventListener('mouseout', () => {
+                    descriptionText.textContent = '';
+                    descriptionText.classList.remove('visible');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

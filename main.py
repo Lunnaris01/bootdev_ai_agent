@@ -22,10 +22,9 @@ You are a helpful AI coding agent.
 
 When a user asks a question or makes a request, make a function call plan. You can perform the following operations:
 
-- List files and directories
-- Read file contents
-- Execute Python files with optional arguments
-- Write or overwrite files
+- List files and directories (get_files_info)
+- Read file contents (get_file_content)
+- Write or overwrite files (write_file)
 
 All paths you provide should be relative to the working directory. You have to always provide a directory, provide "." if you are in root. You do not need to specify the working directory in your function calls as it is automatically injected for security reasons.
 """
@@ -44,7 +43,6 @@ func_map ={
     "get_files_info": get_files_info,
     "get_file_content": get_file_content,
     "write_file": write_file,
-    "run_python_file": run_python_file,
 }
 
 def call_function(function_call_part, verbose=False):
@@ -52,7 +50,7 @@ def call_function(function_call_part, verbose=False):
         print(f"Calling function: {function_call_part.name}({function_call_part.args})")
     print(f" - Calling function: {function_call_part.name}")
     args = function_call_part.args
-    args["working_directory"] = "./calculator"
+    args["working_directory"] = "./hp"
     if function_call_part.name not in func_map.keys():
         return types.Content(
             role="tool",

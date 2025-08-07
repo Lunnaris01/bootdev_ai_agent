@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gryffindor House - Modernized</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Lora:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Lora', serif;
+            background: linear-gradient(rgba(116, 0, 1, 0.7), rgba(116, 0, 1, 0.7)), url('assets/gryffindorbg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #e5d300;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1000px;
+            padding: 40px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 2px solid rgba(229, 211, 0, 0.6);
+            position: relative;
+            z-index: 1;
+            margin: 20px;
+        }
+
+        h1 {
+            font-family: 'Cinzel Decorative', serif;
+            color: #e5d300;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px rgba(229, 211, 0, 0.8), 0 0 30px rgba(229, 211, 0, 0.5);
+            font-size: 3em;
+        }
+
+        .section-title {
+            font-family: 'Cinzel Decorative', serif;
+            color: #e5d300;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-shadow: 0 0 10px rgba(229, 211, 0, 0.6);
+        }
+
+        .characters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 20px;
+            padding-left: 150px;
+            padding-right: 150px;
+        }
+        .traits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            padding-top: 20px;
+            padding-left: 285px;
+            padding-right: 285px;
+        }
+
+        .info-button {
+            padding: 20px;
+            border: 2px solid #e5d300;
+            border-radius: 10px;
+            background-color: rgba(116, 0, 1, 0.8);
+            color: #e5d300;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 80px;
+            box-sizing: border-box;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .info-button:hover {
+            background-color: rgba(229, 211, 0, 0.9);
+            color: #740001;
+            border-color: #740001;
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .hover-section {
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .content-hidden {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .hover-section:hover .content-hidden {
+            display: grid;
+            opacity: 1;
+        }
+
+        .main-info-button {
+            width: 350px;
+            margin-bottom: 30px;
+            font-size: 1.5em;
+            background-color: rgba(116, 0, 1, 0.9);
+            border-color: #e5d300;
+        }
+
+        .hover-section:hover .main-info-button {
+            display: none;
+        }
+
+        #description-text {
+            color: #e5d300;
+            font-size: 1.3em;
+            font-style: italic;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            text-align: center;
+            transition: opacity 0.4s ease-in-out;
+            opacity: 0;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(229, 211, 0, 0.4);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+        }
+        #description-text.visible {
+            opacity: 1;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            background-color: rgba(116, 0, 1, 0.9);
+            color: #e5d300;
+            border: 2px solid #e5d300;
+            border-radius: 8px;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 0.9em;
+            text-decoration: none;
+            z-index: 10;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+        }
+
+        .back-button:hover {
+            background-color: rgba(229, 211, 0, 0.9);
+            color: #740001;
+            border-color: #740001;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                margin: 15px;
+            }
+
+            h1 {
+                font-size: 2.2em;
+            }
+
+            .section-title {
+                font-size: 1.8em;
+            }
+
+            .info-button {
+                font-size: 1em;
+                min-height: 60px;
+                padding: 15px;
+            }
+
+            .main-info-button {
+                width: 90%;
+                font-size: 1.2em;
+            }
+
+            #description-text {
+                font-size: 1em;
+                min-height: 70px;
+            }
+
+            .back-button {
+                top: 15px;
+                left: 15px;
+                padding: 8px 12px;
+                font-size: 0.8em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+
+            .characters-grid, .traits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-button {
+                min-height: 50px;
+                padding: 12px;
+            }
+
+            .main-info-button {
+                width: 100%;
+                font-size: 1.1em;
+            }
+
+            .back-button {
+                top: 10px;
+                left: 10px;
+                padding: 6px 10px;
+                font-size: 0.7em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">Back to Hogwarts</a>
+    <div class="container">
+        <h1>Welcome to Gryffindor House!</h1>
+        <div id="description-text"></div>
+
+        <div class="hover-section">
+            <div class="info-button main-info-button">Characters</div>
+            <div class="content-hidden characters-grid">
+                <div class="info-button" data-description="Harry Potter, 'The Boy Who Lived,' is the courageous protagonist of the series, known for his bravery and unwavering determination to defeat the Dark Lord.">Harry Potter</div>
+                <div class="info-button" data-description="Hermione Granger is the brilliant and resourceful witch of the trio, whose intellect and quick thinking are invaluable to her Gryffindor friends.">Hermione Granger</div>
+                <div class="info-button" data-description="Ron Weasley is Harry's loyal and humorous best friend, a pure-blood wizard from the large and loving Weasley family, known for his unwavering support.">Ron Weasley</div>
+                <div class="info-button" data-description="Albus Dumbledore, the wise and enigmatic Headmaster of Hogwarts, is renowned as one of the most powerful wizards of all time and a beacon of hope against dark forces.">Albus Dumbledore</div>
+                <div class="info-button" data-description="Minerva McGonagall is the stern but fair Head of Gryffindor House and Transfiguration professor, fiercely protective of her students and a powerful witch.">Minerva McGonagall</div>
+                <div class="info-button" data-description="Rubeus Hagrid, the half-giant Keeper of Keys and Grounds at Hogwarts, is a kind-hearted and loyal friend to Harry, with a deep love for magical creatures.">Rubeus Hagrid</div>
+                <div class="info-button" data-description="Fred Weasley, along with his twin George, is a mischievous and entrepreneurial Gryffindor, co-founder of Weasleys' Wizard Wheezes, bringing laughter and joy to dark times.">Fred Weasley</div>
+                <div class="info-button" data-description="George Weasley, the other half of the iconic Weasley twins, shares his brother Fred's wit and love for pranks, making them a formidable and hilarious duo.">George Weasley</div>
+                <div class="info-button" data-description="Neville Longbottom, initially shy, blossoms into a true Gryffindor hero, demonstrating immense courage and leadership in the fight against Voldemort.">Neville Longbottom</div>
+            </div>
+        </div>
+
+        <div class="hover-section">
+            <div class="info-button main-info-button">Traits</div>
+            <div class="content-hidden traits-grid">
+                <div class="info-button" data-description="Gryffindors are renowned for their bravery, facing challenges head-on with courage and conviction.">Brave</div>
+                <div class="info-button" data-description="The daring nature of Gryffindors leads them to take bold risks and embark on adventurous quests.">Daring</div>
+                <div class="info-button" data-description="Gryffindors possess an unyielding nerve, allowing them to remain steadfast in the face of fear or adversity.">Nerve</div>
+                <div class="info-button" data-description="Chivalry is a core Gryffindor trait, characterized by honor, courtesy, and a readiness to help the weak.">Chivalry</div>
+            </div>
+        </div>
+
+        <div class="hover-section">
+            <div class="info-button main-info-button">Famous Artifacts</div>
+            <div class="content-hidden traits-grid">
+                <div class="info-button" data-description="The Sword of Gryffindor is a goblin-made sword, imbued with magical properties that allow it to absorb only what makes it stronger, appearing to worthy Gryffindors in times of need.">Sword of Gryffindor</div>
+                <div class="info-button" data-description="The Sorting Hat is an enchanted, sentient hat at Hogwarts that magically determines which of the four school Houses each new student belongs to, often considering the student's own wishes.">Sorting Hat</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const infoButtons = document.querySelectorAll('.info-button[data-description]');
+            const descriptionText = document.getElementById('description-text');
+            let timeout;
+
+            infoButtons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    clearTimeout(timeout);
+                    descriptionText.textContent = this.getAttribute('data-description');
+                    descriptionText.classList.add('visible');
+                });
+
+                button.addEventListener('mouseleave', function() {
+                    timeout = setTimeout(() => {
+                        descriptionText.textContent = '';
+                        descriptionText.classList.remove('visible');
+                    }, 100); // Small delay to prevent flickering
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ravenclaw House - Modernized</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Lora:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Lora', serif;
+            background: linear-gradient(rgba(14, 26, 64, 0.7), rgba(14, 26, 64, 0.7)), url('assets/ravenclawbg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #946B2D;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1000px;
+            padding: 40px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 2px solid rgba(148, 107, 45, 0.6);
+            position: relative;
+            z-index: 1;
+            margin: 20px;
+        }
+
+        h1 {
+            font-family: 'Cinzel Decorative', serif;
+            color: #946B2D;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px rgba(148, 107, 45, 0.8), 0 0 30px rgba(148, 107, 45, 0.5);
+            font-size: 3em;
+        }
+
+        .section-title {
+            font-family: 'Cinzel Decorative', serif;
+            color: #946B2D;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-shadow: 0 0 10px rgba(148, 107, 45, 0.6);
+        }
+
+        .characters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 20px;
+            padding-left: 150px;
+            padding-right: 150px;
+        }
+        .traits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            padding-top: 20px;
+            padding-left: 285px;
+            padding-right: 285px;
+        }
+
+        .info-button {
+            padding: 20px;
+            border: 2px solid #946B2D;
+            border-radius: 10px;
+            background-color: rgba(14, 26, 64, 0.8);
+            color: #946B2D;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 100px;
+            box-sizing: border-box;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 1px 3px rgba(148, 107, 45, 0.5);
+        }
+
+        .info-button:hover {
+            background-color: rgba(148, 107, 45, 0.9);
+            color: #0E1A40;
+            border-color: #0E1A40;
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .hover-section {
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .content-hidden {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .hover-section:hover .content-hidden {
+            display: grid;
+            opacity: 1;
+        }
+
+        .main-info-button {
+            width: 350px;
+            margin-bottom: 30px;
+            font-size: 1.5em;
+            background-color: rgba(14, 26, 64, 0.9);
+            border-color: #946B2D;
+        }
+
+        .hover-section:hover .main-info-button {
+            display: none;
+        }
+
+        #description-text {
+            color: #946B2D;
+            font-size: 1.3em;
+            font-style: italic;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            text-align: center;
+            transition: opacity 0.4s ease-in-out;
+            opacity: 0;
+            background-color: rgba(148, 107, 45, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(148, 107, 45, 0.4);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+        }
+        #description-text.visible {
+            opacity: 1;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            background-color: rgba(14, 26, 64, 0.9);
+            color: #946B2D;
+            border: 2px solid #946B2D;
+            border-radius: 8px;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 0.9em;
+            text-decoration: none;
+            z-index: 10;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+        }
+
+        .back-button:hover {
+            background-color: rgba(148, 107, 45, 0.9);
+            color: #0E1A40;
+            border-color: #0E1A40;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                margin: 15px;
+            }
+
+            h1 {
+                font-size: 2.2em;
+            }
+
+            .section-title {
+                font-size: 1.8em;
+            }
+
+            .info-button {
+                font-size: 1em;
+                min-height: 60px;
+                padding: 15px;
+            }
+
+            .main-info-button {
+                width: 90%;
+                font-size: 1.2em;
+            }
+
+            #description-text {
+                font-size: 1em;
+                min-height: 70px;
+            }
+
+            .back-button {
+                top: 15px;
+                left: 15px;
+                padding: 8px 12px;
+                font-size: 0.8em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+
+            .characters-grid, .traits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-button {
+                min-height: 50px;
+                padding: 12px;
+            }
+
+            .main-info-button {
+                width: 100%;
+                font-size: 1.1em;
+            }
+
+            .back-button {
+                top: 10px;
+                left: 10px;
+                padding: 6px 10px;
+                font-size: 0.7em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">Back to Hogwarts</a>
+    <div class="container">
+        <h1>Welcome to Ravenclaw House!</h1>
+        <div id="description-text"></div>
+
+        <div class="hover-section">
+            <div class="info-button main-info-button">Characters</div>
+            <div class="content-hidden characters-grid">
+                <div class="info-button" data-description="Luna Lovegood is an eccentric and dreamy Ravenclaw, known for her unique perspective and unwavering belief in unusual creatures and theories.">Luna Lovegood</div>
+                <div class="info-button" data-description="Filius Flitwick is the Charms Master and Head of Ravenclaw House, a tiny but brilliant wizard known for his high-pitched voice.">Filius Flitwick</div>
+                <div class="info-button" data-description="Cho Chang is a popular and talented Ravenclaw student, known for being Harry Potter's first crush and a loyal member of Dumbledore's Army.">Cho Chang</div>
+                <div class="info-button" data-description="Garrick Ollivander is a half-blood wizard who was the proprietor of Ollivanders in Diagon Alley.">Garrick Ollivander</div>
+                <div class="info-button" data-description="Gilderoy Lockhart is a narcissistic and fraudulent wizard, famous for his embellished tales of heroic deeds.">Gilderoy Lockhart</div>
+                <div class="info-button" data-description="Padma Patil is a Ravenclaw student in Harry's year, twin sister of Parvati Patil, and attends the Yule Ball with Ron Weasley.">Padma Patil</div>
+                <div class="info-button" data-description="Terry Boot is a Ravenclaw student in Harry's year and a member of Dumbledore's Army, known for his intelligence.">Terry Boot</div>
+                <div class="info-button" data-description="Michael Corner is a Ravenclaw student in Harry's year and a member of Dumbledore's Army, who dates Ginny Weasley and later Cho Chang.">Michael Corner</div>
+                <div class="info-button" data-description="Rowena Ravenclaw was one of the four founders of Hogwarts School of Witchcraft and Wizardry, renowned for her intelligence and creativity.">Rowena Ravenclaw</div>
+            </div>
+        </div>
+
+        <div class="hover-section">
+            <div class="info-button main-info-button">Traits</div>
+            <div class="content-hidden traits-grid">
+                <div class="info-button" data-description="Ravenclaws are characterized by their intelligence, always seeking knowledge and understanding.">Intelligence</div>
+                <div class="info-button" data-description="They possess a strong sense of wit, often quick-thinking and clever in their responses.">Wit</div>
+                <div class="info-button" data-description="Creativity is a hallmark of Ravenclaw, leading to innovative ideas and unique perspectives.">Creativity</div>
+                <div class="info-button" data-description="Learning is highly valued, with Ravenclaws having a thirst for knowledge and academic pursuits.">Learning</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const descriptionText = document.getElementById('description-text');
+            const characterButtons = document.querySelectorAll('.characters-grid .info-button');
+            const traitButtons = document.querySelectorAll('.traits-grid .info-button');
+
+            const allSubGridButtons = [...characterButtons, ...traitButtons];
+
+            allSubGridButtons.forEach(button => {
+                button.addEventListener('mouseover', (event) => {
+                    const description = event.target.dataset.description;
+                    if (description) {
+                        descriptionText.textContent = description;
+                        descriptionText.classList.add('visible');
+                    }
+                });
+
+                button.addEventListener('mouseout', () => {
+                    descriptionText.textContent = '';
+                    descriptionText.classList.remove('visible');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
