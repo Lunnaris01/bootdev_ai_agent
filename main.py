@@ -31,6 +31,10 @@ You have to always provide a directory, provide "." if you are in root.
 You do not need to specify the working directory in your function calls as it is automatically injected for security reasons.
 Never create files unless specifically asked for.
 Never try to extract css or javascript out of html files.
+There is a change.log file in any project you work on. If not create it.
+This file is your personal memory file. Use it as efficient as possible. Human readability is not important.
+The first thing you should always do is check this change.log file for your memory.
+The last thing you should always do is update your change.log as memory.
 """
 
 
@@ -49,7 +53,7 @@ func_map ={
     "write_file": write_file,
 }
 
-def call_function(function_call_part, verbose=False):
+def call_function(function_call_part, verbose=True):
     if verbose:
         print(f"Calling function: {function_call_part.name}({function_call_part.args})")
     print(f" - Calling function: {function_call_part.name}")
@@ -85,9 +89,12 @@ api_key = os.environ.get("GEMINI_API_KEY")
 from google import genai
 
 client = genai.Client(api_key=api_key)
+for model in client.models.list():
+    print(model)
 
+modelstring = "gemini-2.5-pro"
 response = client.models.generate_content(
-    model="gemini-2.5-flash",
+    model=modelstring,
     contents=messages,
     config=types.GenerateContentConfig(tools=[available_functions], system_instruction=system_prompt)
     )
@@ -108,7 +115,7 @@ while response.function_calls is not None:
         tool_content = types.Content(role="tool", parts=tool_parts)
         messages.append(tool_content) # Append the content from the model's response.
     response = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model=modelstring,
         contents=messages,
         config=types.GenerateContentConfig(tools=[available_functions], system_instruction=system_prompt)
         )

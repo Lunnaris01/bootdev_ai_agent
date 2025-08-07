@@ -3,190 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slytherin House</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <title>Slytherin House - Modernized</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Lora:wght@400;700&display=swap');
+
         body {
-            font-family: 'Open Sans', sans-serif;
-            background: url('assets/slyterinbg.jpg') no-repeat center center fixed;
+            font-family: 'Lora', serif;
+            background: linear-gradient(rgba(26, 71, 42, 0.7), rgba(26, 71, 42, 0.7)), url('assets/slytherinbg.jpg') no-repeat center center fixed;
             background-size: cover;
-            color: #eee;
+            color: #AAAAAA;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
             text-align: center;
+            overflow-x: hidden;
             position: relative;
-            overflow: hidden;
+            padding-top: 80px; /* Space for the fixed header */
         }
-        body::before {
-            content: '';
-            position: absolute;
+
+        .header-bar {
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.6);
-            z-index: 1;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-bottom: 2px solid rgba(170, 170, 170, 0.6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            box-sizing: border-box;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
-        .container {
-            max-width: 900px;
-            padding: 40px;
-            background-color: rgba(20, 20, 20, 0.85);
-            border-radius: 15px;
-            box-shadow: 0 0 40px rgba(173, 216, 230, 0.3);
-            position: relative;
-            z-index: 2;
-            animation: fadeIn 1.5s ease-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        h1 {
-            font-family: 'Cinzel', serif;
+
+        .header-text {
+            font-family: 'Cinzel Decorative', serif;
             color: #AAAAAA;
-            margin-bottom: 20px;
-            font-size: 3em;
-            text-shadow: 0 0 10px rgba(170, 170, 170, 0.7);
+            font-size: 1.8em;
+            text-shadow: 0 0 10px rgba(170, 170, 170, 0.8);
         }
-        p {
-            font-family: 'Open Sans', sans-serif;
-            color: #e0e0e0;
-            font-size: 1.1em;
-            line-height: 1.6;
-            margin-bottom: 30px;
+
+        .container {
+            max-width: 1000px;
+            padding: 40px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 2px solid rgba(170, 170, 170, 0.6);
+            position: relative;
+            z-index: 1;
+            margin: 20px;
+            flex-grow: 1; /* Allows container to take available space */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
+
         .section-title {
+            font-family: 'Cinzel Decorative', serif;
             color: #AAAAAA;
             margin-top: 40px;
             margin-bottom: 20px;
-            font-size: 2em;
+            font-size: 2.5em;
+            text-shadow: 0 0 10px rgba(170, 170, 170, 0.6);
         }
-        .characters-grid {
+
+        .characters-grid, .traits-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             max-width: 800px;
             margin: 0 auto;
-            padding-top: 20px;
-            padding-left: 150px;
-            padding-right: 150px;
+            padding: 20px;
         }
-        .traits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            max-width: 500px;
-            margin: 0 auto;
-            padding-top: 20px;
-            padding-left: 225px;
-            padding-right: 225px;
-        }
+
         .info-button {
-            padding: 25px;
-            border: none;
+            padding: 20px;
+            border: 2px solid #AAAAAA;
             border-radius: 10px;
-            color: white;
-            font-size: 1.3em;
+            background-color: rgba(26, 71, 42, 0.8);
+            color: #AAAAAA;
+            font-size: 1.2em;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            transition: all 0.4s ease;
             text-decoration: none;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
-            overflow: hidden;
-            letter-spacing: 1px;
-            background-color: #1A472A;
-            border: 3px solid #AAAAAA;
-            color: #AAAAAA;
+            text-align: center;
             min-height: 100px;
+            box-sizing: border-box;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 1px 3px rgba(170, 170, 170, 0.5);
         }
-        .info-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300%;
-            height: 300%;
-            background: rgba(255, 255, 255, 0.1);
-            transition: all 0.7s ease-in-out;
-            transform: translate(-50%, -50%) rotate(45deg);
-            z-index: 0;
-            opacity: 0;
-        }
-        .info-button:hover::before {
-            width: 0;
-            height: 0;
-            opacity: 1;
-        }
+
         .info-button:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-            z-index: 1;
-            background-color: #AAAAAA;
+            background-color: rgba(170, 170, 170, 0.9);
             color: #1A472A;
             border-color: #1A472A;
-        }
-
-        .hover-section {
-            margin-bottom: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .content-hidden {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        .hover-section:hover .content-hidden {
-            display: grid;
-            opacity: 1;
-        }
-
-        .main-info-button {
-            width: 300px;
-            margin-bottom: 20px;
-        }
-
-        .hover-section:hover .main-info-button {
-            display: none;
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
         }
 
         #description-text {
             color: #AAAAAA;
-            font-size: 1.2em;
+            font-size: 1.1em;
             font-style: italic;
-            min-height: 80px;
+            min-height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
             text-align: center;
-            transition: opacity 0.3s ease-in-out;
+            transition: opacity 0.4s ease-in-out;
             opacity: 0;
+            background-color: rgba(170, 170, 170, 0.2);
+            border-radius: 10px;
+            padding: 10px 15px;
+            margin: 0 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(170, 170, 170, 0.4);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+            flex-grow: 1;
         }
         #description-text.visible {
             opacity: 1;
         }
 
         .back-button {
-            position: absolute;
-            top: 20px;
-            left: 20px;
             padding: 10px 15px;
-            background-color: #1A472A;
+            background-color: rgba(26, 71, 42, 0.9);
             color: #AAAAAA;
             border: 2px solid #AAAAAA;
             border-radius: 8px;
-            font-family: 'Cinzel', serif;
+            font-family: 'Cinzel Decorative', serif;
             font-size: 0.9em;
             text-decoration: none;
             z-index: 10;
@@ -196,7 +152,7 @@
         }
 
         .back-button:hover {
-            background-color: #AAAAAA;
+            background-color: rgba(170, 170, 170, 0.9);
             color: #1A472A;
             border-color: #1A472A;
             transform: scale(1.05);
@@ -204,131 +160,73 @@
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 25px;
+            body {
+                padding-top: 120px;
             }
-
-            h1 {
-                font-size: 2.2em;
+            .header-bar {
+                flex-direction: column;
+                height: auto;
+                padding: 10px;
             }
-
-            .section-title {
-                font-size: 1.8em;
+            .header-text {
+                font-size: 1.5em;
+                margin-bottom: 10px;
             }
-
-            .info-button {
-                font-size: 1em;
-                min-height: 60px;
-                padding: 15px;
-            }
-
-            .main-info-button {
-                width: 90%;
-            }
-
             #description-text {
                 font-size: 1em;
-                min-height: 70px;
-            }
-
-            .back-button {
-                top: 15px;
-                left: 15px;
-                padding: 8px 12px;
-                font-size: 0.8em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 20px;
-            }
-
-            h1 {
-                font-size: 1.8em;
-            }
-
-            .section-title {
-                font-size: 1.5em;
-            }
-
-            .characters-grid, .traits-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .info-button {
                 min-height: 50px;
-                padding: 12px;
+                width: 90%;
             }
-
-            .main-info-button {
-                width: 100%;
-            }
-
             .back-button {
-                top: 10px;
-                left: 10px;
-                padding: 6px 10px;
-                font-size: 0.7em;
+                margin-top: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-button">Back to Hogwarts</a>
+    <div class="header-bar">
+        <div class="header-text">Slytherin</div>
+        <div id="description-text">Hover over a character or trait to see the description.</div>
+        <a href="index.html" class="back-button">Back to Hogwarts</a>
+    </div>
     <div class="container">
-        <h1>Welcome to Slytherin House!</h1>
-        <div id="description-text"></div>
-
-        <div class="hover-section">
-            <div class="info-button main-info-button">Characters</div>
-            <div class="content-hidden characters-grid">
-                <div class="info-button" data-description="Draco Malfoy, a pure-blood wizard from a prominent family, is Harry Potter's rival and a member of Slytherin House.">Draco Malfoy</div>
-                <div class="info-button" data-description="Severus Snape, the Potions Master and later Headmaster of Hogwarts, is a complex and enigmatic character with deep loyalties.">Severus Snape</div>
-                <div class="info-button" data-description="Lord Voldemort, born Tom Riddle, is the most powerful Dark Wizard of all time and the main antagonist of the series.">Lord Voldemort</div>
-                <div class="info-button" data-description="Bellatrix Lestrange is a fanatically loyal and sadistic Death Eater, one of Voldemort's most dangerous followers.">Bellatrix Lestrange</div>
-                <div class="info-button" data-description="Regulus Black, Sirius Black's younger brother, was a Death Eater who had a change of heart and made a significant sacrifice.">Regulus Black</div>
-                <div class="info-button" data-description="Horace Slughorn is the amiable and influential Potions Master who has a habit of collecting talented students.">Horace Slughorn</div>
-                <div class="info-button" data-description="Pansy Parkinson is a prominent Slytherin student in Harry's year, often seen alongside Draco Malfoy.">Pansy Parkinson</div>
-                <div class="info-button" data-description="Blaise Zabini is a male Slytherin student in Harry's year, known for being sophisticated and calm.">Blaise Zabini</div>
-                <div class="info-button" data-description="Vincent Crabbe is one of Draco Malfoy's hulking sidekicks, known for his lack of intellect and unwavering loyalty to Draco.">Vincent Crabbe</div>
-            </div>
+        <h1 class="section-title">Characters</h1>
+        <div class="characters-grid">
+            <div class="info-button" data-description="Draco Malfoy, a pure-blood wizard from a prominent family, is Harry Potter's rival and a member of Slytherin House.">Draco Malfoy</div>
+            <div class="info-button" data-description="Severus Snape, the Potions Master and later Headmaster of Hogwarts, is a complex and enigmatic character with deep loyalties.">Severus Snape</div>
+            <div class="info-button" data-description="Lord Voldemort, born Tom Riddle, is the most powerful Dark Wizard of all time and the main antagonist of the series.">Lord Voldemort</div>
+            <div class="info-button" data-description="Bellatrix Lestrange is a fanatically loyal and sadistic Death Eater, one of Voldemort's most dangerous followers.">Bellatrix Lestrange</div>
         </div>
 
-        <div class="hover-section">
-            <div class="info-button main-info-button">Traits</div>
-            <div class="content-hidden traits-grid">
-                <div class="info-button" data-description="Slytherins are known for their ambition, often striving for greatness and power.">Ambitious</div>
-                <div class="info-button" data-description="Resourcefulness is a key trait, allowing Slytherins to achieve their goals through any means necessary.">Resourceful</div>
-                <div class="info-button" data-description="Slytherins often display cunning, using their intelligence and wit to outmaneuver others.">Cunning</div>
-                <div class="info-button" data-description="Leadership qualities are common, with Slytherins often taking charge and guiding others.">Leadership</div>
-            </div>
+        <h1 class="section-title">Traits</h1>
+        <div class="traits-grid">
+            <div class="info-button" data-description="Ambition is a key trait of Slytherins, who are driven to achieve power and success.">Ambition</div>
+            <div class="info-button" data-description="Cunning and resourcefulness are highly valued, with Slytherins known for their ability to find clever solutions.">Cunning</div>
+            <div class="info-button" data-description="Leadership and a desire to be in charge are common among members of Slytherin house.">Leadership</div>
+            <div class="info-button" data-description="Self-preservation is a core instinct, with Slytherins always looking out for their own interests.">Self-Preservation</div>
+            <div class="info-button" data-description="Slytherins are known for their strong sense of fraternity and loyalty to their own house.">Fraternity</div>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', function () {
             const descriptionText = document.getElementById('description-text');
-            const characterButtons = document.querySelectorAll('.characters-grid .info-button');
-            const traitButtons = document.querySelectorAll('.traits-grid .info-button');
+            const infoButtons = document.querySelectorAll('.info-button');
 
-            const allSubGridButtons = [...characterButtons, ...traitButtons];
-
-            allSubGridButtons.forEach(button => {
-                button.addEventListener('mouseover', (event) => {
-                    const description = event.target.dataset.description;
-                    if (description) {
-                        descriptionText.textContent = description;
-                        descriptionText.classList.add('visible');
-                    }
+            infoButtons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    const description = button.getAttribute('data-description');
+                    descriptionText.textContent = description;
+                    descriptionText.classList.add('visible');
                 });
 
-                button.addEventListener('mouseout', () => {
-                    descriptionText.textContent = '';
+                button.addEventListener('mouseleave', () => {
+                    descriptionText.textContent = 'Hover over a character or trait to see the description.';
                     descriptionText.classList.remove('visible');
                 });
             });
         });
     </script>
+
 </body>
 </html>
