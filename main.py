@@ -26,7 +26,11 @@ When a user asks a question or makes a request, make a function call plan. You c
 - Read file contents (get_file_content)
 - Write or overwrite files (write_file)
 
-All paths you provide should be relative to the working directory. You have to always provide a directory, provide "." if you are in root. You do not need to specify the working directory in your function calls as it is automatically injected for security reasons.
+All paths you provide should be relative to the working directory.
+You have to always provide a directory, provide "." if you are in root.
+You do not need to specify the working directory in your function calls as it is automatically injected for security reasons.
+Never create files unless specifically asked for.
+Never try to extract css or javascript out of html files.
 """
 
 

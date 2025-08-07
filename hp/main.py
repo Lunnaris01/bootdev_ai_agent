@@ -13,7 +13,7 @@ class Handler(SimpleHTTPRequestHandler):
         return SimpleHTTPRequestHandler.do_GET(self)
 
 def run():
-    port = 8001
+    port = 8000
     server_address = ('', port)
     httpd = HTTPServer(server_address, Handler)
     print(f"Serving on port {port}")
